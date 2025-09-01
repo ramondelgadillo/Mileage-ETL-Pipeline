@@ -6,14 +6,15 @@ This project implements an end-to-end ETL (Extract, Transform, Load) pipeline to
 ## Features
 - Extract raw car data from CSV files and load it into pandas DataFrames.
 - Clean and transform data by removing irrelevant columns, handling missing values, and categorizing mileage into ranges.
-- Load processed data into an SQLite database with structured schemas.
+- Load processed data into a PostgreSQL database with structured schemas.
 - Perform SQL queries to analyze trends such as average price by mileage range and mileage distribution by brand.
 - Visualize analytical results with charts to enhance interpretability.
 
 ## Technologies Used
 - **Python** — Data processing and scripting.
 - **pandas** — Data manipulation and transformation.
-- **SQLite** — Lightweight database storage and querying.
+- **PostgreSQL** — Relational database storage and querying.
+- **SQLAlchemy & psycopg2** — Database connection and interaction.
 - **Matplotlib** — Data visualization.
 
 ## Project Structure
@@ -22,7 +23,7 @@ Mileage Prediction/
 │
 ├── extract.py # Extract data from CSV
 ├── transform.py # Transform and clean data
-├── load.py # Load data into SQLite DB
+├── load.py # Load data into PostgreSQL
 ├── query.py # SQL queries for data insights
 ├── visualize.py # Visualization of query results
 ├── cleaned_cars_data.csv # Original cleaned CSV dataset
@@ -34,14 +35,45 @@ Mileage Prediction/
 
 ## Usage
 
+### ETL Pipeline Overview
+
+Cleaned CSV Data
+       │
+       ▼
+   [EXTRACT] --> extract.py
+       │
+       ▼
+   [TRANSFORM] --> transform.py
+       │
+       ▼
+   [LOAD] --> load.py
+       │
+       ▼
+PostgreSQL Database
+       │
+       ▼
+   [QUERY] --> query.py
+       │
+       ▼
+ [VISUALIZE] --> visualize.py
+       │
+       ▼
+ Charts & Insights
+
+
 ### Setup
 1. Install Python (>=3.7) and dependencies:
 ```bash
-pip install pandas matplotlib
 
-(SQLite3 is included in standard Python distributions.)
+    pip install pandas matplotlib sqlalchemy psycopg2-binary
 
-    Place your cleaned_cars_data.csv file in the project directory.
+
+2. Install PostgreSQL (if not installed)
+
+3. Create a PostgreSQL database:
+
+    CREATE DATABASE car_mileage;
+
 
 Running the Pipeline
 
@@ -49,7 +81,7 @@ Run the scripts sequentially:
 
 python extract.py       # Loads the raw CSV data
 python transform.py     # Cleans and categorizes mileage data
-python load.py          # Loads transformed data into SQLite
+python load.py          # Loads transformed data into PostgreSQL
 python query.py         # Executes analytical SQL queries
 python visualize.py     # Generates charts from query results
 
@@ -61,12 +93,3 @@ Sample Insights
 
     Visualizations provide clear, actionable insights into pricing trends and mileage ranges
 
-Future Improvements
-
-    Expand ETL pipeline to integrate additional vehicle features (e.g., engine size, fuel type).
-
-    Automate pipeline execution with scheduling tools (e.g., Airflow, cron).
-
-    Develop a web dashboard for interactive exploration of mileage analytics.
-
-    Incorporate machine learning for mileage prediction and price forecasting.

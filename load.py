@@ -1,25 +1,25 @@
-import sqlite3
 import pandas as pd
+from sqlalchemy import create_engine
 from transform import transform_data
 
-# Function to load the data into SQLite database
-def load_data_to_sqlite():
+# PostgreSQL credentials
+USER = "YOUR_USERNAME"
+PASSWORD = "YOUR_PASSWORD"
+HOST = "localhost"
+PORT = "5432"
+DATABASE = "car_mileage"
+
+def load_data_to_postgres():
     # Get the transformed data
     df = transform_data()
 
-    # Connect to SQLite database (will create it if it doesn't exist)
-    conn = sqlite3.connect('mileage_data.db')
+    # Connect to PostgreSQL using SQLAlchemy
+    engine = create_engine(f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
 
-    # Create a table and insert data into SQLite
-    df.to_sql('cars', conn, if_exists='replace', index=False)
+    # Load data into PostgreSQL
+    df.to_sql('cars', engine, if_exists='replace', index=False)
 
-    # Commit changes and close connection
-    conn.commit()
-    conn.close()
-
-    print("Data has been loaded into SQLite database.")
+    print("Data has been loaded into PostgreSQL database.")
 
 if __name__ == "__main__":
-    load_data_to_sqlite()
-
-
+    load_data_to_postgres()

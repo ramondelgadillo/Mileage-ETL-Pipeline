@@ -1,21 +1,22 @@
-import sqlite3
 import pandas as pd
+from sqlalchemy import create_engine
 
-# Function to execute SQL query and return results as DataFrame
+# PostgreSQL credentials
+USER = "YOUR_USERNAME"
+PASSWORD = "YOUR_PASSWORD"
+HOST = "localhost"
+PORT = "5432"
+DATABASE = "car_mileage"
+
+# Connect to PostgreSQL
+engine = create_engine(f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
+
 def execute_query(query):
-    # Connect to SQLite database
-    conn = sqlite3.connect('mileage_data.db')
-
-    # Execute query and load results into a DataFrame
-    result = pd.read_sql(query, conn)
-
-    # Close the connection
-    conn.close()
-    return result
+    # Execute query and return results as DataFrame
+    df = pd.read_sql(query, engine)
+    return df
 
 if __name__ == "__main__":
-    # Example queries
-
     # Query: Find the percentage of low-mileage cars by brand
     query1 = """
     SELECT brand, 
@@ -56,7 +57,3 @@ if __name__ == "__main__":
     data4 = execute_query(query4)
     print("Average price and mileage by condition:")
     print(data4)
-
-
-# Strip whitespace and standardize formatting - This script removes empty space, fixes formatting, and makes the mileage ranges consistent
-#df['mileage_range'] = df['mileage_range'].str.strip().str.replace(' ', '').str.upper()

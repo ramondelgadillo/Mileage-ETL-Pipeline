@@ -7,7 +7,7 @@ def load_data(file_path):
 
 def extract_data():
     # Define the file path for the cleaned data
-    cleaned_file = "C:\\Users\\ramon\\Desktop\\Mileage Prediction\\cleaned_cars_data.csv"
+    cleaned_file = "C:\\Users\\name\\Desktop\\Mileage Analysis\\cleaned_cars_data.csv"
     data = load_data(cleaned_file)
     return data
 
