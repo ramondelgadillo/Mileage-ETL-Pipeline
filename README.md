@@ -1,7 +1,7 @@
 # Car Mileage Analysis - ETL Pipeline
 
 ## Project Overview
-This project implements an end-to-end ETL (Extract, Transform, Load) pipeline to analyze car mileage data and its relationship with price, brand, and condition. Using Python and SQLite, the pipeline cleans and processes raw data, stores it in a relational database, executes complex queries for insights, and visualizes key findings with Matplotlib. This approach demonstrates how ETL pipelines enable scalable, maintainable data analysis workflows without relying on machine learning models.
+This project implements an end-to-end ETL (Extract, Transform, Load) pipeline to analyze car mileage data and its relationship with price, brand, and condition. Using Python and PostgreSQL, the pipeline cleans and processes raw data, stores it in a relational database, executes complex queries for insights, and visualizes key findings with Matplotlib. This demonstrates how ETL pipelines enable scalable, maintainable data analysis workflows without relying on machine learning models.
 
 ## Features
 - Extract raw car data from CSV files and load it into pandas DataFrames.
@@ -28,7 +28,7 @@ Mileage Prediction/
 ├── visualize.py # Visualization of query results
 ├── cleaned_cars_data.csv # Original cleaned CSV dataset
 ├── transformed_cars_data.csv # Transformed dataset after processing
-├── mileage_data.db # SQLite database storing processed data
+├── mileage_data.db # PostgreSQL database storing processed data
 ├── README.md # Project documentation (this file)
 └── pycache/ # Python cache files (auto-generated)
 
